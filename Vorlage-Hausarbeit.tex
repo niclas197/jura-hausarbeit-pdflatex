@@ -1,0 +1,221 @@
+% Diese Version nur mit pdfLaTeX benutzen. Für XeLaTeX sind Anpassungen nötig.
+% Erste Alpha Version
+% 
+% Lizenz GPL v3
+% You are not allowed to use any of this code for military or similar purposes.
+% Copyleft 2014, Niclas Stock
+% niclas.stock@me.com
+%
+% Standing on the shoulders of giants
+%
+% 
+
+%----------------------------------------------------------------------------------------
+%	PRÄAMBEL
+%----------------------------------------------------------------------------------------
+
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[%
+	12pt,% hier die Standardschriftgröße wählen
+	paper=a4,
+	pagesize,
+	oneside,
+	%DIV=calc,
+	%BCOR=1cm,
+%----------------------------------------------------------------------------------------%----------------------------------------------------------------------------------------
+	draft,% Entfernen vor dem Veröffentlichen
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+	ngerman
+]{scrreprt}
+
+% Anpassungen und Pakete
+\include{code}
+% Abkürzungen in separater Datei
+\include{abbreviations}
+
+
+% Draft mode Packages
+%%%%%%%%%%%%%%%%%%%%
+\usepackage{ifdraft}
+
+\ifoptiondraft{
+	\usepackage{color}
+	%\usepackage[inner]{showlabels}
+	\reversemarginpar \setlength{\marginparwidth}{5.5cm}
+	\newcommand{\todo}[1]{\marginpar{\sffamily\scriptsize\textcolor{red}{#1}}}
+}
+
+\ifoptionfinal{
+\newcommand{\todo}[1]{}
+}
+%%%%%%%%%%%%%%%%%%%%
+
+% Folgende citekeys ohne Title ausgeben:
+% Hier müssen Großkommentare mit mehreren Bänden eingetragen werden, damit diese nicht immer mit dem ganzen Titel zitiert werden (da hier der gleiche shortauthor gesetzt ist (z.B. MüKo) würde ansonsten ein Vollzitat erfolgen)
+\nextcitenotitle{%
+nk_bgb1:2011,nk_bgb2:2012,mueko_stgb1:2011,mueko_stgb3:2003,lk1:2003,lk1:2006,lk5:2005,mueko_bgb1:2012,mueko_bgb2:2012,mueko_bgb3:2012,mueko_bgb4:2009,mueko_bgb5:2009,mueko_bgb6:2009,staudinger_241-243:2009,staudinger_249-254:2005,staudinger_255-304:2009,staudinger_311-312:2005,staudinger_311b-311c2011,staudinger_315-326:2009,staudinger_328-359:2004,staudinger_433-480:2012,staudinger_433-487:2004,staudinger_311b-311c:2011,staudinger_134-138:2011,staudinger_90-133:2011,palandt:2011,palandt:2012}
+%%%%%%%%%%%%%%%%%%%%%%%
+\hyphenation{MüKo-BGB}
+
+
+% Randeinstellungen für das Gutachten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Rand links 7cm, rechts 1cm, oben 1.5cm, unten 1cm, Abstand z. Kopfnote
+\usepackage{geometry}
+\geometry{lmargin=7cm,rmargin=1cm,tmargin=1.5cm,bmargin=1cm,headsep=3mm}
+% Alternativ (genau am Limit (meines) Druckers) :-)
+%\geometry{lmargin=7cm,rmargin=0.5cm,tmargin=0.9cm,bmargin=0.6cm,headsep=0cm}
+
+% Option für die Größe der Fußnoten:
+%\renewcommand{\footnotesize}{\small}
+
+%----------------------------------------------------------------------------------------
+%	DOKUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+{
+% Randeinstellungen für den Vorspann (InhaltsVZ, etc.)
+% left margin 1cm breiter für Steg (je nach Bindung ändern)
+\newgeometry{lmargin=3.0cm,rmargin=2cm,tmargin=2.5cm,bmargin=4cm,headsep=1.3cm}
+
+% Römische Ziffern zur Nummerierung des Vorspanns
+\pagenumbering{Roman}
+
+%%%%%%%%%%%%%%%
+% Titelseite
+\include{titlepage} 
+
+%%%%%%%%%%%%%%%
+% Sachverhalt
+\include{sachverhalt}
+
+%Inhaltsverzeichnis (Gliederung) automatisch erstellen
+\tableofcontents
+
+%Literaturverzeichnis jurabib.bib einbeziehen
+\bibliography{/Users/niclas/Dropbox/JURA/Literatur/juralib.bib} 
+\bibliographystyle{jurabib}
+
+
+% Abkürzungsverzeichnis
+\chapter*{Abkürzungsverzeichnis}
+\vspace{2cm}
+
+\textit{Hinsichtlich der verwendeten Abkürzungen wird verwiesen auf:}
+\\
+\\
+\textbf{Kirchner, Hildebert/ \\
+Butz, Cornelie\\}
+Abkürzungsverzeichnis der Rechtssprache. 6. Auflage, Berlin: de Gruyter, 2008
+\clearpage
+
+
+% Abschnitt für die "Gutachten" Seite (also die leerseite auf der nur "Gutachten" steht)
+% blöderweise kann auf diese Seite nicht verzichtet werden, da sonst merkwürdigerweise alle Fußnoten verrücken.
+%\newgeometry{lmargin=10cm,rmargin=2cm,tmargin=2.5cm,bmargin=4cm,headsep=1.5cm}
+\titleformat{\part}[hang]{\huge\raggedleft\bfseries}{\thepart\quad}{0pt}{}
+\part*{Gutachten}
+}
+\restoregeometry % Normale Randeinstellungen
+
+
+%%%%%%%%%%%%%%
+% Hauptteil
+
+% Seitenzahlen mit arabischen Nummern
+\pagenumbering{arabic}
+
+% Seitenzahlen "reset"
+\setcounter{page}{1}
+
+% Zeilenabstand 1.5
+\spacing{1.43}
+% spacing{1.43} ~ ca. Word 1,5 Abstand
+% spacing erhöht das Default spacing * 1.43, also so wie Word das berechnet (Default (~1,2*1,5). Die .07 die zum *1.5 fehlen sind dem geschuldet, dass LaTeX bei TNR 12pt einen etwas größeren Abstand hat als Word.
+
+% Einzug der Gliederungsebenen {Ebene}{Links der Überschrift}{Über/Links der Überschrift}{Abstand zum Text danach (unter/links)}
+\titlespacing{\part}{0em}{1em}{0em}
+\titlespacing{\chapter}{0em}{1em}{0em}
+\titlespacing{\section}{0em}{0em}{0em}
+\titlespacing{\subsection}{0em}{0em}{1em}
+\titlespacing{\subsubsection}{0em}{0em}{1em}
+\titlespacing{\paragraph}{0em}{0em}{1em}
+\titlespacing{\subparagraph}{0em}{0em}{1em}
+\titlespacing{\subAparagraph}{0em}{0em}{1em}
+\titlespacing{\subBparagraph}{0em}{0em}{1em}
+\titlespacing{\subCparagraph}{0em}{0em}{1em}
+
+% Fonts und Formatierung der Gliederungsebenen festlegen
+% Als Alternative zum sparen von Zeilen kann man ab \section abwärts statt "hang" "runin" wählen, damit der Text direkt an die (fette) Überschrift anschließt. Um den Abstand zum Text festzulegen muss dann aber bei \titlespacing oben, die letzte Option auf min. 1em (eher mehr) festgelegt werden.
+\titleformat{\part}[hang]{\large\centering\bfseries}{\thepart\quad}{0pt}{}
+\titleformat{\chapter}[hang]{\normalfont\centering\large\bfseries}{\thechapter\quad}{0pt}{}
+\titleformat{\section}[hang]{\normalfont\centering\normalsize\bfseries}{\thesection\quad}{0pt}{}
+\titleformat{\subsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsection\quad}{0em}{}
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection\quad}{0pt}{}
+\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph\quad}{0pt}{}
+\titleformat{\subparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubparagraph\quad}{0pt}{}
+\titleformat{\subAparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubAparagraph\quad}{0pt}{}
+\titleformat{\subBparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubBparagraph\quad}{0pt}{}
+\titleformat{\subCparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubCparagraph\quad}{0pt}{}
+% \part und \chapter schließen direkt an, erzeugen also keine neuen Seiten.
+\titleclass{\part}{straight}
+\titleclass{\chapter}{straight}
+
+
+
+\pagestyle{scrheadings}
+\clearscrheadfoot 
+\ihead{\headmark} 
+\ohead[\thepage]{\thepage}
+
+%----------------------------------------------------------------------------------------
+%	Inhalt
+%----------------------------------------------------------------------------------------
+\include{inhalt}
+%----------------------------------------------------------------------------------------
+%	// Ende Inhalt
+%----------------------------------------------------------------------------------------
+
+
+
+
+\pagestyle{scrplain}
+%----------------------------------------------------------------------------------------
+%	Appendix
+%----------------------------------------------------------------------------------------
+
+% Randeinstellungen für den Appendix
+\newgeometry{lmargin=3.0cm,rmargin=2cm,tmargin=2.5cm,bmargin=4cm,headsep=1.3cm}
+\titlespacing{\chapter}{0pt}{0em}{0pt}
+\part*{Versicherung der selbstständigen Anfertigung}
+\addcontentsline{toc}{part}{Versicherung der selbstständigen Anfertigung}
+
+% Römische Nummerierung
+\pagenumbering{Roman}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% den Pagecount (die Römische Zahl oben) muss leider manuell eingestellt werden
+\setcounter{page}{12} % hier die Seitenzahl der letzten Seite setzen !!!!!!!!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{4em}
+Hiermit versichere ich, dass ich die vorliegende Hausarbeit eigenständig und ohne fremde Hilfe angefertigt und keine anderen als die angegebenen Hilfsmittel benutzt habe.
+\\
+
+Die Stellen der Hausarbeit, die anderen Quellen im Wortlaut oder dem Sinn nach entnommen wurden, sind durch Angaben der Herkunft kenntlich gemacht.
+\vspace{4em}
+
+
+\makeatletter
+Matrikel-Nr.~\textbf{\noindent\@author}
+\makeatother
+
+\vspace{3em}
+
+Hannover, den \hspace{1em} \rule{10cm}{0.5pt}
+
+\end{document}
+
+
+

@@ -1,0 +1,64 @@
+% \anf (Anführungszeichen)
+%\rcite[Gericht]{Fundstelle}
+
+\newcommand{\anf}[1]{\enquote{#1}}
+
+\usepackage{ifthen}
+\newcommand{\rcite}[2][\empty]{%
+  \ifthenelse{\equal{#1}{\empty}}
+    {#2}
+    {\textit{#1} #2}}
+
+%	\zB 		z.B.
+%	\zT 		z.T.
+%	\mwN 		m.w.N
+%	\ua 		u.a.
+%	\Abs 		Abs.
+%	\Nr 		Nr.
+%	\iSd		i.S.d.
+%	\iH			i.H.
+%	\iHv		i.H.v.
+%	\pg 		§
+%	\Pg 		§§
+%	\rn 		Rn.
+%	\Rn			Rn.
+%	\Seite 	S.
+%	\hM 		h.M. (kursiv)
+%	\aA 		a.A. (kursiv)
+%	\eA 		e.A. (kursiv)
+%	\rspr		Rspr. (kursiv)
+%	\Rspr		Rspr. (kursiv)
+%	\bgh 		BGH (kursiv)
+%	\bverfg	BVerfG (kursiv)
+
+\newcommand{\zB}{z.\,B.\xspace}
+\newcommand{\zT}{z.\,T.\xspace}
+\newcommand{\mwN}{m.\,w.\,N.\xspace}
+\newcommand{\ua}{u.\,a.\xspace}
+\newcommand{\Abs}{Abs.\,}
+\newcommand{\Nr}{Nr.\,}
+\newcommand{\iSd}{i.\,S.\,d.\xspace}
+\newcommand{\iH}{i.\,H.\xspace}
+\newcommand{\iHv}{i.\,H.\,v.\xspace}
+\newcommand{\iVm}{i.\,V.\,m.\xspace}
+
+
+\newcommand{\pg}{\S\,} 
+\newcommand{\Pg}{\SSS\,} 
+\newcommand{\rn}{Rn.\,}
+\newcommand{\Rn}{Rn.\,} 
+\newcommand{\Seite}{S.\,}
+\newcommand{\hM}{\emph{h.\,M.}\xspace}
+\newcommand{\aA}{\emph{a.\,A.}\xspace}
+\newcommand{\eA}{\emph{e.\,A.}\xspace}
+\newcommand{\rspr}{\emph{Rspr.}\xspace}
+\newcommand{\Rspr}{\emph{Rspr.}\xspace}
+\newcommand{\bgh}{\emph{BGH}\xspace}
+\newcommand{\BGH}{\emph{BGH}\xspace}
+\newcommand{\bverfg}{\emph{BVerfG}\xspace}
+
+\newcommand{\Name}[1]{\emph{#1}}
+\newcommand{\Gericht}[1]{\emph{#1}}
+
+%\newcommand{\definition}[1]{\begin{tcolorbox}[boxrule=0.3mm, arc=0mm, title=Definition] #1\end{tcolorbox}}
+%\newcommand{\Box}[1]{\begin{tcolorbox}[boxrule=0.3mm, arc=0mm] #1\end{tcolorbox}}

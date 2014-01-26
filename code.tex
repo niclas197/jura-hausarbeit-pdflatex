@@ -1,0 +1,266 @@
+%----------------------------------------------------------------------------------------
+%	PAKETE
+%----------------------------------------------------------------------------------------
+\usepackage{fixltx2e} 
+\usepackage{eurosym} % Euro Symbol
+\usepackage{blindtext}
+\usepackage{setspace} % Spacing Einstellungen
+\usepackage{titlesec} % Textüberschriften anpassen
+
+%
+% pdfLaTeX spezifisch:
+%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[sc]{mathpazo} % Palatino Font als serif Alternative zu TNR
+\usepackage{mathptmx} % Times New Roman
+%\usepackage[scaled=.90]{helvet} % Helvetica als sans serif
+\usepackage{inconsolata} % Inconsolas als Monospace
+\usepackage[ngerman]{babel} %Deutsche Sonderzeichen und Silbentrennung
+\usepackage{textcomp} %diverse Symbole
+\DeclareUnicodeCharacter{20AC}{\euro} % Euro Symbol per default Unicode
+
+%
+% Mathe etc.
+%
+\usepackage[decimalsymbol=comma]{siunitx} % SI-Einheiten
+%\usepackage{mhchem} % Chemie
+
+%
+% development & misc.
+%
+\usepackage{xspace}
+\usepackage[hyphens]{url} %Url Umbruch
+\usepackage{remreset} % Fußnoten reset verhindern
+%\usepackage{booktabs} %Nette Tabellen
+%\usepackage{tcolorbox} % schöne graue Boxen etc.
+
+%
+% Typographie
+%
+\usepackage[babel,german=quotes]{csquotes} % \enquote{Text} für korrekte Anführungszeichen
+\usepackage{ellipsis} % Korrigiert den Weißraum um Auslassungspunkte
+\usepackage[final]{microtype}
+
+%----------------------------------------------------------------------------------------
+%	TYPOGRAPHIEEINSTELLUNGEN%----------------------------------------------------------------------------------------
+
+% Deutsche Einrückweise der Zeilen
+\setlength{\parindent}{0em}
+
+% Einrücken der Fußnoten
+\deffootnote{1em}{1em}{%
+\textsuperscript{\thefootnotemark\ }
+}
+
+% Fortlaufende Fußnoten: 
+\makeatletter \@removefromreset{footnote}{chapter} \makeatother
+
+%Default Fonts (serif) setzen. insb. fürs Inhaltsverzeichnis
+\setkomafont{disposition}{\normalfont} 
+\addtokomafont{chapterentry}{\bfseries} 
+\addtokomafont{partentry}{\bfseries} 
+
+
+%Überschriften fürs Inhaltsverzeichnis usw. formatieren
+\titleformat{\chapter}[hang]{\normalfont\large\bfseries}{\thechapter\quad}{0pt}{}
+
+
+%----------------------------------------------------------------------------------------
+%	GLIEDERUNGSEBENEN UND TOC
+%----------------------------------------------------------------------------------------
+
+% Fügt Gliederungsebene \subA(B+C)paragraph hinzu.
+\titleclass{\subAparagraph}{straight}[\subparagraph]
+\makeatletter
+\newcounter{subAparagraph}[subparagraph]
+\newcommand*\l@subAparagraph{\bprot@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\titleclass{\subBparagraph}{straight}[\subAparagraph]
+\makeatletter\newcounter{subBparagraph}[subAparagraph]
+\newcommand*\l@subBparagraph{\bprot@dottedtocline{7}{14em}{6em}}
+\makeatother
+
+\titleclass{\subCparagraph}{straight}[\subBparagraph]
+\makeatletter\newcounter{subCparagraph}[subBparagraph]
+\newcommand*\l@subCparagraph{\bprot@dottedtocline{8}{14em}{6em}}
+\makeatother
+%Orientierung an den Inhaltsverzeichnissen von C.H. Beck
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{2em}{2.5em}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{4em}{2.5em}}
+\renewcommand{\l@subsubsection}{\@dottedtocline{3}{6em}{2.5em}}
+\renewcommand{\l@paragraph}{\@dottedtocline{4}{8em}{2.5em}}
+\renewcommand{\l@subparagraph}{\@dottedtocline{5}{10em}{2.5em}}
+\renewcommand{\l@subAparagraph}{\@dottedtocline{6}{12em}{2.5em}}
+\renewcommand{\l@subBparagraph}{\@dottedtocline{7}{14em}{2.5em}}
+\renewcommand{\l@subCparagraph}{\@dottedtocline{8}{16em}{2.5em}}
+\renewcommand*{\@dotsep}{1}
+\makeatother
+
+% Einstellungen für die Gliederungsebenen
+% A. I. 1. a) aa) (1) alpha)
+\usepackage{alnumsec}
+\alnumsectionlevels{0}{chapter,section,subsection,subsubsection,paragraph,subparagraph,subAparagraph,subBparagraph,subCparagraph}
+\otherseparators{5}
+\surroundarabic[(][)]{}{.}
+\surroundgreek[][)]{}{.}
+\alnumsecstyle{LRaldagbr}
+
+\renewcommand*{\thepart}{§\,\arabic{part}.}
+
+% Numeriere 6 Ebenen tief
+\setcounter{secnumdepth}{8}
+% Ebenen im ToC
+\setcounter{tocdepth}{8}
+
+%Kopf- und Fußzeilen
+\usepackage[automark,headsepline]{scrpage2}
+\clearscrplain
+\pagestyle{scrplain}
+\ohead[\thepage]{\thepage}
+\renewcommand{\headfont}{\small\bfseries}
+
+% cleveref (für Verweise)
+\usepackage{cleveref}
+\crefname{part}{Abschnitt}{Abschnitt}
+\crefname{chapter}{Abschnitt}{Abschnitt}
+\crefname{section}{Abschnitt}{Abschnitt}
+\crefname{subsection}{Abschnitt}{Abschnitt}
+\crefname{subsubsection}{Abschnitt}{Abschnitt}
+\crefname{paragraph}{Abschnitt}{Abschnitt}
+\crefname{subparagraph}{Abschnitt}{Abschnitt}
+\crefname{subAparagraph}{Abschnitt}{Abschnitt}
+\crefname{subBparagraph}{Abschnitt}{Abschnitt}
+\crefname{subCparagraph}{Abschnitt}{Abschnitt}
+
+% Zuverlässiger Reset der Ebenen
+%\makeatletter
+%\@addtoreset{section}{part} \@addtoreset{subsection}{part} \@addtoreset{subsection}{chapter} \@addtoreset{subsubsection}{part} \@addtoreset{subsubsection}{chapter} \@addtoreset{subsubsection}{section} \@addtoreset{paragraph}{part} \@addtoreset{paragraph}{chapter} \@addtoreset{paragraph}{section} \@addtoreset{paragraph}{subsection} \@addtoreset{subparagraph}{part} \@addtoreset{subparagraph}{chapter} \@addtoreset{subparagraph}{section} \@addtoreset{subparagraph}{subsection} \@addtoreset{subparagraph}{subsubsection} \@addtoreset{subAparagraph}{part} \@addtoreset{subAparagraph}{chapter} \@addtoreset{subAparagraph}{section} \@addtoreset{subAparagraph}{subsection} \@addtoreset{subAparagraph}{subsubsection} \@addtoreset{subAparagraph}{paragraph} \@addtoreset{subBparagraph}{part} \@addtoreset{subBparagraph}{chapter} \@addtoreset{subBparagraph}{section} \@addtoreset{subBparagraph}{subsection} \@addtoreset{subBparagraph}{subsubsection} \@addtoreset{subBparagraph}{paragraph}\@addtoreset{subBparagraph}{subparagraph} \@addtoreset{subCparagraph}{part} \@addtoreset{subCparagraph}{chapter} \@addtoreset{subCparagraph}{section} \@addtoreset{subCparagraph}{subsection} \@addtoreset{subCparagraph}{subsubsection} \@addtoreset{subCparagraph}{paragraph}\@addtoreset{subCparagraph}{subparagraph}\@addtoreset{subCparagraph}{subAparagraph}
+%\makeatother
+
+%----------------------------------------------------------------------------------------
+%	JURABIB
+%----------------------------------------------------------------------------------------
+\usepackage{jurabib}
+\jurabibsetup{
+% Autor kursiv
+% Komma zwischen Autor/Bearbeiter und Titel im Zitat; Kurztitel wenn Autor mehr als ein Werk hat
+% Alternative "commasep,all" wenn immer Kurztitel ausgegeben werden sollen
+titleformat={commasep},
+% Bearbeiter kursiv
+annotatorformat=italic,
+% Bearbeiter nach Bindestrich (Palandt-Grüneberg)
+%annotatorlastsep=divis,
+% Komma nach Verfasser (vor dem Rest)
+commabeforerest,
+%Lange Querverweise (auf Festschriften etwa)
+crossref={long,dynamic},
+% "zitiert als..." im LitVZ, wenn howcited-Feld in BibTeX=1
+howcited=normal,
+% zitierten Seitenbereich immer ausgeben (always)
+pages={test},
+bibformat={tabular,ibidem},% Litverz. tabellarisch, mit der-/dieselbe
+lookforgender,% Auf das gender-Feld achten, um ders./dies. Zitate zu ermöglichen sm = derselbe, sf = dieselbe, pm oder pf = dieselben (singe male, female; plural male, female)
+%superscriptedition=switch,%Hochgestellte Auflage, wenn ssedition=1 in .bib
+%dotafter=bibentry,%Punkt nach jedem Eintrag im Lit.verzeichnis
+authorformat=dynamic,
+}
+\jbsuperscripteditionafterauthor
+\citetitlefortype{article,periodical,incollection}%Diese immer mit Titel zitieren
+\formatpages[~]{article}{(}{)}%Zeitschriften als JZ 2001, 1057, (S.) %[, ]
+\formatpages[~]{incollection}{(}{)}%Sammbelbandbeitr"age als FS xy, 1057, (S.) %[, ]
+
+% Bei Festschriften und Zeitschriftenartikeln: "`in"' vor Titel der Sammlung
+\renewcommand{\bibjtsep}{in: } 
+\renewcommand{\bibbtsep}{in: } 
+
+% Komma statt . vor in:
+\renewcommand*{\bibatsep}{,}
+\renewcommand*{\bibbdsep}{,}
+
+% Anführungszeichen bei Zeitungsartieln.
+\renewcommand*{\ajtsep}{}
+\renewcommand*{\bibapifont}[1]{„{#1}“}
+\renewcommand*{\jbapifont}[1]{„{#1}“}
+
+% Bei Periodika (AcP et.al.) die Jahreszahl in runde (statt eckige) Klammern setzen.
+\renewcommand*{\bibpldelim}{(}
+\renewcommand*{\bibprdelim}{)}
+
+% Linke Spalte des Lit.verz. soll ein Drittel der ges. Textbreite einnehmen
+\renewcommand*{\bibleftcolumn}{\textwidth/3}
+
+% Nicht Punkt, sondern Komma nach Auflage
+\DeclareRobustCommand{\jbaensep}{,}
+
+% Bei Artikeln: Heft-Nummer in Klammern hinter dem Erscheinungsjahr, etwa 2002(7). (aus jurabib-Gruppe)
+\DeclareRobustCommand{\artnumberformat}[1]{(#1)}
+
+% Kein Komma hinter Zeitschriftenname (aus: jurabib-Gruppe #661)
+\AddTo\bibsgerman{\def\ajtsep{}}
+\jbsuperscripteditionafterauthor
+\jbsilent % jurabib Warnungen ausschalten (da jblookforgender verwendet wird)
+\jbuseidemhrulefalse % derselbe/dieselbe statt ----
+
+% Für URLS
+% Zitat mit URL in Fußnote bspw so: \footnote{\cite{pruetting:2011aa}\citefield{url}{pruetting:2011aa} Zugriff am 31.7.2012}
+\biburlfont{same}
+
+%----------------------------------------------------------------------------------------
+%	// ENDE JURABIB
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	Ein wenig Commandgefrickel%----------------------------------------------------------------------------------------
+
+
+% Gegen Schusterjungen und Hurenkinder
+% check log! (code von tex.stackexchange.com)
+\clubpenalty=152
+\widowpenalty=151
+% we want to know if we are on first or second column in a 2 column document
+\makeatletter
+  \def\oncol{\if@twocolumn \space \if@firstcolumn  (first \else (second \fi column)\fi}
+\makeatletter
+% check if the output penalty was due to orphan or widow or both
+\def\testforwidowsandorphans{%
+   \ifnum\outputpenalty=151
+        \typeout{*** Widow on page  \thepage \oncol}%
+  \else
+       \ifnum\outputpenalty=152
+          \typeout{*** Orphan on page \thepage \oncol}%
+      \else
+         \ifnum\outputpenalty=303
+            \typeout{*** Orphan and Widow on page \thepage \oncol}%
+        \fi
+      \fi
+ \fi
+}
+% execute this code at the very beginning of the OR
+\toks0=\output
+\output\expandafter{\expandafter\testforwidowsandorphans
+                                   \the\toks0}
+%%%%%%%
+
+
+%Automatisch alle Fußnoten mit einem Punkt abschließen (best feature ever?)
+\usepackage{xstring,etoolbox}
+\makeatletter
+%%% taken from amsthm.sty
+\def\@addpunct#1{%
+  \relax\ifhmode
+    \ifnum\spacefactor>\@m \else#1\fi
+  \fi}
+\def\nopunct{\spacefactor 1007 }
+\def\frenchspacing{\sfcode`\.1006\sfcode`\?1005\sfcode`\!1004%
+  \sfcode`\:1003\sfcode`\;1002\sfcode`\,1001 }
+%%% end of borrowed code
+\patchcmd{\@footnotetext}
+  {#1}
+  {#1\protect\@addpunct{.}}
+  {}{}
+\makeatother

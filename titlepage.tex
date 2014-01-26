@@ -1,0 +1,51 @@
+\begin{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%Daten für Titelseite definieren
+
+%Titel der Arbeit eintragen
+\title{Verteidigung gegen die dunklen Künste}
+%Prof. etc eintragen
+\newcommand{\Aufgabensteller}{Prof. S. Snape}
+\newcommand{\Semesteranzahl}{2. Fachsemester}
+\newcommand{\Semester}{Sommersemester 2012}
+% Matrikelnummer eintragen
+\author{1234567}
+
+%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{flushright}
+\makeatletter
+% Semester eintragen
+\Semesteranzahl \\
+% automatisch Datum von Heute 
+Matrikel-Nr.~\textbf{\noindent\@author}\\
+\hfill\@date
+\makeatother
+\end{flushright}
+
+
+\begin{center}
+\vspace*{4cm}
+
+{\normalfont
+\bfseries\hrulefill
+
+\makeatletter
+% Semester eintragen
+\Semester\\
+\Huge\@title\\
+\vspace{0.5cm}
+\LARGE\ Hausarbeit
+\makeatother
+
+\vspace{1cm}
+
+{\LARGE\Aufgabensteller}
+
+\hrulefill}
+
+
+\end{center}
+\end{titlepage}

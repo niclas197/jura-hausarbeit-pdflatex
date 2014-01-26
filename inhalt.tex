@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapter 			für A.	B.	C.	D.
+% \section 			für I. II.	III.IV.
+% \subsection			für 1. 2. 	3. 	4.
+% \subsubsection		für a)	b)	c)	d)
+% \paragraph			für aa) bb)	cc)	dd)
+% \subparagraph		für (1) (2)	(3)	(4)
+% \subsubparagraph	für α	β	γ 	δ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \footnote{freier Text, z.B. BGHSt 32,1; \cite[Bearbeiter][Stelle]{CiteKey}
+% optional:
+% \nopunct am ende der Fußnote wenn kein . gewünscht ist (z.B. bei ! ? \mwN)
+%
+% \emph{Text} oder textit{Text} = kuriver Text
+% \textbf{Text} = fetter Text
+% \anf{Text} oder \enquote{Text} = Text in Anführungszeichen
+%
+% \label{NAME} um Anker zu setzen.
+% \cref{NAME} um darauf zu verweisen, bspw: Abschnitt B.II.c)aa)
+% \cpageref{NAME} um auf Seite des Ankers zu verweisen.
+% 
+% optional:
+% statt § 123 oder §§ 123, \pg 123 oder \PG 123 benutzen
+% statt Rn. 123 \rn 123 benutzen
+% statt \emph{BGH} \bgh \hM \aA \eA \rspr \bverfg
+% 
+% ~ setzt ein Leerzeichen an dem nicht umgebrochen wird.
+% Bsp: \pg 123~Abs.~1 StGB
+%
+% \todo{Hier noch etwas hinschreiben} erzeugt -für die Bearbeitung sehr praktisch- eine farbige Notiz im linken Rand, so dass man schnell seine "Baustellen erkennen kann!
+%
+% Notfalls: \enlargethispage{\baselineskip} für +1 Zeile
+% \looseness=-1 oder 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Abschnitt "\part" Erster Tatkomplex o.Ä.
+% Das sternchen unterdrückt die Nummerierung
+\part*{Erster Tatkomplex}
+% hierdurch wird es trotzdem ins Inhaltsverzeichnis aufgenommen (ggf. Titel anpassen)
+\addcontentsline{toc}{part}{Erster Tatkomplex}
+\chapter{Test}\label{test}\thispagestyle{scrplain}
+%%%%%%%%%%%%%%%%
+% Für die Fußnoten
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}\addtocounter{footnote}{1}
+\footnotetext{Alle §§ ohne Gesetzesbezeichnung sind solche des BGB; alle Art. solche des GG. Absätze werden durch römische, Sätze durch arabische Zahlen gekennzeichnet.}
+\renewcommand{\thefootnote}{\arabic{footnote}}\addtocounter{footnote}{-1}
+%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+\part*{Zweiter Tatkomplex}
+\addcontentsline{toc}{part}{Zweiter Tatkomplex}
+
+\chapter{Dritte Tat}
+%%%%%
+% das Sternchen unterdrückt die Nummerierung
+\chapter*{Endergebnis und Konkurrenzen}
+% hierdurch wird es trotzdem ins Inhaltsverzeichnis aufgenommen (ggf. Titel anpassen)
+\addcontentsline{toc}{part}{Endergebnis und Konkurrenzen}
+% zurücksetzen des Section Counters (damit es hier wieder mit I, II etc. beginnt.)
+\setcounter{section}{0}
+%%%%%
+\section[Kurzname der im InhaltsVZ angezeigt wird]{Erste Tat}
+
+\section{Zweite Tat}
+
+\section{Dritte Tat}
+
